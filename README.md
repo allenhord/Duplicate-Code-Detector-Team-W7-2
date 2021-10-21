@@ -1,4 +1,4 @@
-# Project-Phase-2-User-Stories
+# Duplicate-Code-Detector-Team-W7-2
 
 CS350, Old Dominion Univ., Fall 2021
 
