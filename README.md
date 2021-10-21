@@ -1,4 +1,4 @@
-# Duplicate-Code-Detector-Team-W7-2
+# Duplicate-Code-Detector
 
 CS350, Old Dominion Univ., Fall 2021
 
