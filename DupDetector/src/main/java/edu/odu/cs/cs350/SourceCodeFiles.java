@@ -1,4 +1,4 @@
-package dupdetector;
+package edu.odu.cs.cs350;
 import java.util.*;
 
 public class SourceCodeFiles {
