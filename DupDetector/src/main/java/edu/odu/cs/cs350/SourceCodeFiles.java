@@ -14,7 +14,11 @@ public class SourceCodeFiles {
 	
 	//number of C++ files
 	private int numCFiles;
+	
+	//number of suggestions
+	private int numSuggestions;
 
+	
 	//add individual C++ file paths to filePathSet
 	public void addFilePaths(String... filePaths) {
 		for(String i: filePaths) {
@@ -86,5 +90,19 @@ public class SourceCodeFiles {
 	 */
 	public void setNumCFiles(int numCFiles) {
 		this.numCFiles = numCFiles;
+	}
+
+	/**
+	 * @return the numSuggestions
+	 */
+	public int getNumSuggestions() {
+		return numSuggestions;
+	}
+
+	/**
+	 * @param numSuggestions the numSuggestions to set
+	 */
+	public void setNumSuggestions(int numSuggestions) {
+		this.numSuggestions = numSuggestions;
 	}
 }
