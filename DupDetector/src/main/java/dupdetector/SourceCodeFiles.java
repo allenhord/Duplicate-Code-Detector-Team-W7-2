@@ -1,4 +1,4 @@
-package DupDetector;
+package dupdetector;
 import java.util.*;
 
 public class SourceCodeFiles {
