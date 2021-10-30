@@ -7,8 +7,13 @@ public class DupDetector {
 		System.out.println("Hello World");
 		
 		SourceCodeFiles currentSourceCodeFiles = new SourceCodeFiles();
+		
 		System.out.println(args);
+		
 		currentSourceCodeFiles.addFilePaths(args);
+		currentSourceCodeFiles.setNumSuggestions(nSuggestions);
+		
+		
 		currentSourceCodeFiles.printFilePaths();
 
 	}

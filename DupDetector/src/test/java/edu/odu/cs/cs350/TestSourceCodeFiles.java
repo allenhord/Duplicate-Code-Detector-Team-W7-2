@@ -13,9 +13,9 @@ public class TestSourceCodeFiles{
 		SourceCodeFiles m = new SourceCodeFiles();
 		//assertThat(m.fileSetToString(), not(contains("/file.cpp")));
 		//assertThat(m.printFilePaths(), not(containsString("/file.cpp")));
-		m.addFilePaths("/file1.cpp");
+		//m.addFilePaths("/file1.cpp");
 		m.printFilePaths();
-		m.addFilePaths("something/file2.cpp");
+		//m.addFilePaths("something/file2.cpp");
 		m.printFilePaths();
 		System.out.println(m.fileSetToString());
 		//assertThat(m.toString(), contains("/file1.cpp"));

@@ -20,7 +20,7 @@ public class SourceCodeFiles {
 
 	
 	//add individual C++ file paths to filePathSet
-	public void addFilePaths(String... filePaths) {
+	public void addFilePaths(String[] filePaths) {
 		for(String i: filePaths) {
 			filePathSet.add(i);
 		}
