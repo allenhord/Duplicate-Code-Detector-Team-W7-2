@@ -1,2 +1,4 @@
+edu/odu/cs/cs350/DupDetector.java
+ edu.odu.cs.cs350.DupDetector
 edu/odu/cs/cs350/SourceCodeFiles.java
  edu.odu.cs.cs350.SourceCodeFiles

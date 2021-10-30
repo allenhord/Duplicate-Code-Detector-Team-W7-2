@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.odu.cs.cs350.TestSourceCodeFiles" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-10-29T22:16:28" hostname="DESKTOP-DFVCVEV" time="0.017">
+<testsuite name="edu.odu.cs.cs350.TestSourceCodeFiles" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-10-30T17:46:25" hostname="DESKTOP-DFVCVEV" time="0.017">
   <properties/>
   <testcase name="testAddFilePaths()" classname="edu.odu.cs.cs350.TestSourceCodeFiles" time="0.017"/>
   <system-out><![CDATA[/file1.cpp
