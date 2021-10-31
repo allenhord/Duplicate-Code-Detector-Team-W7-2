@@ -103,7 +103,15 @@ public class DupDetector {
 			//this is the directory path only does 1 level search for now
 			else if (currFile.exists() && currFile.isDirectory())
 			{
+				//have an internal count to see if the directory has any valid files
+				int filesScannedInDir=0;
+				filesScannedInDir+=recursiveFileSearch(currFile);
 				filesScanned+=recursiveFileSearch(currFile);
+				//display a message if the directory did not have any valid files scanned
+				if(filesScannedInDir==0)
+				{
+					System.out.println ("No valid Files were found in  Directory specified by path: "+ pathString);
+				}
 			}
 			else
 			{
