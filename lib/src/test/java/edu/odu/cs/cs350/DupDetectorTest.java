@@ -18,8 +18,11 @@ import org.junit.Test;
 public class DupDetectorTest {
 
 	@Test
+	//testing the main function
 	public void testMain() {
+
 		System.out.println("Not yet implemented");;
+		
 	}
 	
 	@Test

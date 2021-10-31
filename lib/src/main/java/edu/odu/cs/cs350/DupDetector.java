@@ -106,15 +106,11 @@ public class DupDetector {
 				//have an internal count to see if the directory has any valid files
 				int filesScannedInDir=0;
 				filesScannedInDir+=recursiveFileSearch(currFile);
-				filesScanned+=recursiveFileSearch(currFile);
+				filesScanned+=filesScannedInDir;
 				//display a message if the directory did not have any valid files scanned
 				if(filesScannedInDir==0)
 				{
 					System.out.println ("No valid Files were found in  Directory specified by path: "+ pathString);
-				}
-				else
-				{
-					System.out.println("Files Scanned: "+filesScannedInDir);
 				}
 			}
 			else
@@ -130,6 +126,8 @@ public class DupDetector {
 	
 
 }
+	
+
 	
 	//Method to display all files within a directory recursively searching 
 	//TODO eventually this needs to return files or do more with them
