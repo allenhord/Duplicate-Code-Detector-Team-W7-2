@@ -11,6 +11,9 @@ public class DupDetector {
 	public static ArrayList<String> CppExtensions=CppExtensions =new ArrayList<String>();
 	public static  int validFileCount=0;;
 	
+	//create instance of SourceCodeFiles object
+	public static SourceCodeFiles currentFiles = new SourceCodeFiles();
+	
 	
 	public static void main(String[] args) {
 		
@@ -22,7 +25,7 @@ public class DupDetector {
 		int nSuggestions=-1;
 		
 		
-		//start itarating through the arguments passed
+		//start iterating through the arguments passed
 		System.out.println("Files Scanned:");
 		int filesScanned=0;
 		for(int currArg=0;currArg<args.length;currArg++)
@@ -45,7 +48,7 @@ public class DupDetector {
 			
 			else {
 			
-			//if it is the second argument thent here is a possibility of it being the properties file
+			//if it is the second argument then there is a possibility of it being the properties file
 			
 			File currFile=new File(args[currArg]);
 			String pathString=currFile.toString();
@@ -63,14 +66,18 @@ public class DupDetector {
 					
 					if(extension=="ini")
 					{
-						//do somemthing with the properties file
+						//do something with the properties file
 					}
 					//if it is a file that has extension from CppExtensions then do stuff
 					else if (CppExtensions.contains(extension))
 					{
+	
+						//store filepath to filepatharray & filepathset
+						currentFiles.addFilePathArray(pathString);
+						
 						//display the path to that file
-						//TODO store that file information somwhere
 						System.out.println(pathString);
+						
 						//increment number of files scanned
 						filesScanned++;
 					}
@@ -89,9 +96,11 @@ public class DupDetector {
 				String extension= pathString.substring(index+1);
 					if (CppExtensions.contains(extension))
 					{
+						//store filepath to filepatharray & filepathset
+						currentFiles.addFilePathArray(pathString);
 						//display the path to that file
-						//TODO store that file information somwhere
 						System.out.println(pathString);
+
 						//increment number of files scanned
 						filesScanned++;
 					}
@@ -122,8 +131,7 @@ public class DupDetector {
 			}
 
 	}
-	
-	
+
 
 }
 	
@@ -155,16 +163,19 @@ public class DupDetector {
 						String extension= filename.substring(index+1);
 						if (CppExtensions.contains(extension))
 						{
+							
+							//store filepath to filepatharray & filepathset
+							currentFiles.addFilePathArray(filename);
 							//display the path to that file
-							//TODO store that file information somewhere
 							System.out.println(filename);
 							//increment number of files scanned
 							validFileCount++;
 						}
-					
+
 				}
 			}
 		}
+		//currentFiles.printFilePaths();
 		return validFileCount;
 	}
 }
