@@ -6,19 +6,19 @@ public class DupDetector {
 
 	 //Driver class with the main method
 	//global variables
-	public static int MaxSubstitutions;
-	public static int MinSequenceLength;
-	public static ArrayList<String> CppExtensions;
+	public static int MaxSubstitutions=8;
+	public static int MinSequenceLength=10;
+	public static ArrayList<String> CppExtensions=CppExtensions =new ArrayList<String>();
+	public static  int validFileCount=0;;
+	
 	
 	public static void main(String[] args) {
 		
 		
 		//setting default values for dup detector
-		 MaxSubstitutions=8;
-		 MinSequenceLength=10;
-		CppExtensions =new ArrayList<String>();
 		CppExtensions.add("cpp");
 		CppExtensions.add("h");
+		
 		int nSuggestions=-1;
 		
 		
@@ -112,6 +112,10 @@ public class DupDetector {
 				{
 					System.out.println ("No valid Files were found in  Directory specified by path: "+ pathString);
 				}
+				else
+				{
+					System.out.println("Files Scanned: "+filesScannedInDir);
+				}
 			}
 			else
 			{
@@ -129,9 +133,9 @@ public class DupDetector {
 	
 	//Method to display all files within a directory recursively searching 
 	//TODO eventually this needs to return files or do more with them
-	private static int recursiveFileSearch(File infile)
+	public static int recursiveFileSearch(File infile)
 	{
-		int validFileCount=0;
+		
 		if(infile.isDirectory())
 		{
 			
@@ -150,7 +154,7 @@ public class DupDetector {
 						if (CppExtensions.contains(extension))
 						{
 							//display the path to that file
-							//TODO store that file information somwhere
+							//TODO store that file information somewhere
 							System.out.println(filename);
 							//increment number of files scanned
 							validFileCount++;
