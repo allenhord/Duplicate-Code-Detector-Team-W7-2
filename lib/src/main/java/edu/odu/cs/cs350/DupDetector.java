@@ -22,7 +22,7 @@ public class DupDetector {
 		CppExtensions.add("cpp");
 		CppExtensions.add("h");
 		
-		int nSuggestions=-1;
+		currentFiles.setNumSuggestions(-1);
 		
 		
 		//start iterating through the arguments passed
@@ -34,7 +34,7 @@ public class DupDetector {
 			if(currArg==0)
 			{
 				try {
-					nSuggestions=Integer.parseInt(args[currArg]);
+					currentFiles.setNumSuggestions(Integer.parseInt(args[currArg]));
 					
 				}
 				//catch the error and exit if it is not an int

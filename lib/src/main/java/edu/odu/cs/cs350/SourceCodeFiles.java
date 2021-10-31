@@ -56,8 +56,8 @@ public class SourceCodeFiles {
 		for(String i: filePaths) {
 			filePathSet.add(i);
 			//update numCFiles
-			this.setNumCFiles(filePathSet.size());
 		}
+		this.setNumCFiles(filePathSet.size());
 	}
 
 	//print each entry in filePathSet on new line
@@ -67,21 +67,6 @@ public class SourceCodeFiles {
 			System.out.println(i.next());
 	}
 	
-	//print filePathSet array
-	/*public void printFilePathsArray() {
-		System.out.println(Arrays.toString(filePathArray));
-	}
-	*/
-	//convert filePathSet to string (may be redundant)
-	public String fileSetToString() {
-		StringBuffer buf = new StringBuffer();
-			for (String p: filePathSet) {
-	        buf.append(p);
-	        buf.append("  ");
-		}
-	        return buf.toString();
-	}
-
 	/**
 	 * @return the filePathSet
 	 */
@@ -96,23 +81,22 @@ public class SourceCodeFiles {
 		this.filePathSet = filePathSet;
 	}
 
-	/**
-	 * @return the filePathArray
-	 *
+	
+	//return the filePathArray
+	 
 	public Object[] getFilePathArray() {
 		return filePathArray;
 	}
-
-	**
-	 * @param filePathArray the filePathArray to set
-	 *
-	public void setFilePathArray(Object[] filePathArray) {
+	
+	 // @param filePathArray the filePathArray to set
+	 
+	public void setFilePathArray(String[] filePathArray) {
 		this.filePathArray = filePathArray;
 	}
-
-	**
-	 * @return the numCFiles
-	 */
+	
+	
+	//return the numCFiles
+	 
 	public int getNumCFiles() {
 		return numCFiles;
 	}
