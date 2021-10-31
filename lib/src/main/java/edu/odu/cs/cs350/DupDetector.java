@@ -135,19 +135,23 @@ public class DupDetector {
 	//TODO eventually this needs to return files or do more with them
 	public static int recursiveFileSearch(File infile)
 	{
-		
+		//if the file is a directory
 		if(infile.isDirectory())
 		{
-			
+			//get the list of all files in the directory
 			File[] files =infile.listFiles();
+			//loop through each file
 			for(File file: files)
 			{
+				//check if any of the files is a directory
 				if(file.isDirectory())
 				{
+					//if it is call the function recursively
 					recursiveFileSearch(file);
 				}
 				else
 				{	
+					//follow same procedure as adding a normal file
 						String filename=file.toString();
 						int index=filename.lastIndexOf('.');
 						String extension= filename.substring(index+1);
