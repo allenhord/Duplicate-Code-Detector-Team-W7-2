@@ -124,7 +124,7 @@ public class DupDetector {
 				}
 				
 				//reset the filesScannedInDir counter for any future iterations
-				filesScannedInDir=0;
+				validFileCount=0;
 			}
 			else
 			{
