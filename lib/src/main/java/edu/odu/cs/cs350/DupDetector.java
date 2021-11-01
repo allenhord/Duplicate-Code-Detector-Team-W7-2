@@ -116,11 +116,15 @@ public class DupDetector {
 				int filesScannedInDir=0;
 				filesScannedInDir+=recursiveFileSearch(currFile);
 				filesScanned+=filesScannedInDir;
+				
 				//display a message if the directory did not have any valid files scanned
 				if(filesScannedInDir==0)
 				{
 					System.out.println ("No valid Files were found in  Directory specified by path: "+ pathString);
 				}
+				
+				//reset the filesScannedInDir counter for any future iterations
+				filesScannedInDir=0;
 			}
 			else
 			{
