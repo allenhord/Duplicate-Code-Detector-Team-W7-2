@@ -9,7 +9,7 @@ public class DupDetector {
 	public static int MaxSubstitutions=8;
 	public static int MinSequenceLength=10;
 	public static ArrayList<String> CppExtensions=CppExtensions =new ArrayList<String>();
-	public static  int validFileCount=0;;
+
 	
 	//create instance of SourceCodeFiles object
 	public static SourceCodeFiles currentFiles = new SourceCodeFiles();
@@ -23,7 +23,7 @@ public class DupDetector {
 		CppExtensions.add("h");
 		
 		currentFiles.setNumSuggestions(-1);
-		
+	
 		
 		//start iterating through the arguments passed
 		System.out.println("Files Scanned:");
@@ -31,6 +31,7 @@ public class DupDetector {
 		for(int currArg=0;currArg<args.length;currArg++)
 		{
 			//if it is the first argument then expectation is it is an int and it is number of suggestions
+		
 			if(currArg==0)
 			{
 				try {
@@ -109,12 +110,14 @@ public class DupDetector {
 						throw new IllegalArgumentException("File specified by file path: "+ pathString+" is not accepted");
 					}
 			}
-			//this is the directory path only does 1 level search for now
+			//this is the directory path only does
 			else if (currFile.exists() && currFile.isDirectory())
 			{
 				//have an internal count to see if the directory has any valid files
 				int filesScannedInDir=0;
+				
 				filesScannedInDir+=recursiveFileSearch(currFile);
+				
 				filesScanned+=filesScannedInDir;
 				
 				//display a message if the directory did not have any valid files scanned
@@ -124,7 +127,7 @@ public class DupDetector {
 				}
 				
 				//reset the filesScannedInDir counter for any future iterations
-				validFileCount=0;
+			
 			}
 			else
 			{
@@ -145,6 +148,7 @@ public class DupDetector {
 	//TODO eventually this needs to return files or do more with them
 	public static int recursiveFileSearch(File infile)
 	{
+		int fileCount=0;
 		//if the file is a directory
 		if(infile.isDirectory())
 		{
@@ -157,7 +161,7 @@ public class DupDetector {
 				if(file.isDirectory())
 				{
 					//if it is call the function recursively
-					recursiveFileSearch(file);
+					fileCount+=recursiveFileSearch(file);
 				}
 				else
 				{	
@@ -173,13 +177,13 @@ public class DupDetector {
 							//display the path to that file
 							System.out.println(filename);
 							//increment number of files scanned
-							validFileCount++;
+							fileCount++;
 						}
 
 				}
 			}
 		}
 		//currentFiles.printFilePaths();
-		return validFileCount;
+		return fileCount;
 	}
 }

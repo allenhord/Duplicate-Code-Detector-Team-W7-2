@@ -32,7 +32,7 @@ public class DupDetectorTest {
 	// It should accurately count the .cpp and.h files
 	public void testDirRecursion() {
 		//create the path to the resources folder
-		String path = "src/test/resources";
+		String path = "src/test/data";
 		File dirFile= new File(path);
 		//create the file directory
 		//and add extensions to check for valid 
@@ -50,6 +50,18 @@ public class DupDetectorTest {
 		System.out.println("Files scanned: "+filesFound);
 		//check that the number of files found is the same as 4
 		assertTrue(filesFound==filecount);
+		
+		//checks empty directory
+		
+		//create the path to the empty directory folder
+				String path2 = "src/test/data/DupDetectorTestDirectory/EmptyDirectory";
+				File dirFile2= new File(path2);
+			int filecount2=0;
+			int filesFoundInEmptyDir=0;
+			filesFoundInEmptyDir=DupDetector.recursiveFileSearch(dirFile2);
+			System.out.println("File path : "+ dirFile2.isDirectory()+dirFile2.getAbsolutePath());
+			System.out.println("Files scanned: "+ filesFoundInEmptyDir );
+			assertTrue(filesFoundInEmptyDir==filecount2);
 		
 		
 	}
