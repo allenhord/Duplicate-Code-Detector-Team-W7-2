@@ -2,6 +2,9 @@ package edu.odu.cs.cs350;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
 public class DupDetector {
 
 	 //Driver class with the main method
@@ -78,6 +81,14 @@ public class DupDetector {
 						
 						//display the path to that file
 						System.out.println(pathString);
+						System.out.println("Tries to scann tokens");
+						try {
+							ArrayList<Token> tokensInFile=ScanFile(currFile);
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						System.out.println("Scanned tokens");
 						
 						//increment number of files scanned
 						filesScanned++;
@@ -101,6 +112,14 @@ public class DupDetector {
 						currentFiles.addFilePathArray(pathString);
 						//display the path to that file
 						System.out.println(pathString);
+						System.out.println("Tries to scann tokens");
+						try {
+							ArrayList<Token> tokensInFile=ScanFile(currFile);
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						System.out.println("Scanned tokens");
 
 						//increment number of files scanned
 						filesScanned++;
@@ -116,7 +135,12 @@ public class DupDetector {
 				//have an internal count to see if the directory has any valid files
 				int filesScannedInDir=0;
 				
-				filesScannedInDir+=recursiveFileSearch(currFile);
+				try {
+					filesScannedInDir+=recursiveFileSearch(currFile);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				filesScanned+=filesScannedInDir;
 				
@@ -141,12 +165,27 @@ public class DupDetector {
 
 
 }
-	
+	//method to scan the contents of the file and convert them into tokens 
+	//@return returns the list of tokens
+	public static ArrayList<Token> ScanFile(File infile) throws FileNotFoundException
+	{
+		ArrayList<Token> tokens= new ArrayList<Token>();
+		FileReader reader=new FileReader(infile);
+		TokenStream tokenstream=new TokenStream(reader);
+		for(Token tok:tokenstream)
+		{
+			tokens.add(tok);
+			System.out.println("Token stored is: " + tok.getType() +" " + tok.getLexeme());
+		}
+		
+		
+		return tokens;
+	}
 
 	
 	//Method to display all files within a directory recursively searching 
 	//TODO eventually this needs to return files or do more with them
-	public static int recursiveFileSearch(File infile)
+	public static int recursiveFileSearch(File infile) throws FileNotFoundException
 	{
 		int fileCount=0;
 		//if the file is a directory
@@ -169,6 +208,9 @@ public class DupDetector {
 						String filename=file.toString();
 						int index=filename.lastIndexOf('.');
 						String extension= filename.substring(index+1);
+						System.out.println("Tries to scann tokens");
+						ArrayList<Token> tokensInFile=ScanFile(file);
+						System.out.println("Scanned tokens");
 						if (CppExtensions.contains(extension))
 						{
 							

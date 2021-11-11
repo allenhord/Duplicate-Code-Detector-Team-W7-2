@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import org.junit.jupiter.api.Test;
 
@@ -45,7 +46,12 @@ public class DupDetectorTest {
 		//set the initial count to 0
 		int filesFound=0;
 		//call the method to find the files
-		filesFound=DupDetector.recursiveFileSearch(dirFile);
+		try {
+			filesFound=DupDetector.recursiveFileSearch(dirFile);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//display the number of files scanned
 		System.out.println("Files scanned: "+filesFound);
 		//check that the number of files found is the same as 4
@@ -58,7 +64,12 @@ public class DupDetectorTest {
 				File dirFile2= new File(path2);
 			int filecount2=0;
 			int filesFoundInEmptyDir=0;
-			filesFoundInEmptyDir=DupDetector.recursiveFileSearch(dirFile2);
+			try {
+				filesFoundInEmptyDir=DupDetector.recursiveFileSearch(dirFile2);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.out.println("File path : "+ dirFile2.isDirectory()+dirFile2.getAbsolutePath());
 			System.out.println("Files scanned: "+ filesFoundInEmptyDir );
 			assertTrue(filesFoundInEmptyDir==filecount2);
