@@ -46,25 +46,23 @@ lineComment="//" {InputCharacter}* {LineTerminator}?
 multiLineComment="/*" [^*] ~"*/" | "/*" "*" +"/" 
 
 /* identifiers */
-
+Identifier=[:jletter:][:jletterdigit:]*
+/*
 letter          = [A-Za-z]
 L               = [a-zA-Z_]
 digit           = [0-9]
 alphanumeric    = {letter}|{digit}
 other_id_char   = [_]
 Identifier      = {letter}({alphanumeric}|{other_id_char})*
-
+*/
 /* integer literals */
 IntegerLiteral = [0-9][0-9]* | [0-9][_0-9]*[0-9]
 
 %%
 
-
-  /* keywords */
-  "KEYWORD"                     { return symbol(TokenKinds.KEYWORD,yytext() ); }
   
   /* Keywords */
-
+	
     "static_assert"          { return symbol(TokenKinds.KEYWORD,yytext() ); }
     "typename"               { return symbol(TokenKinds.KEYWORD,yytext() ); }
     "decltype"               { return symbol(TokenKinds.KEYWORD,yytext() ); }
@@ -96,7 +94,7 @@ IntegerLiteral = [0-9][0-9]* | [0-9][_0-9]*[0-9]
     "dynamic_cast"           { return symbol(TokenKinds.KEYWORD,yytext() ); }
     "enum"                   { return symbol(TokenKinds.KEYWORD,yytext() ); }
     "export"                { return symbol(TokenKinds.KEYWORD,yytext() ); }
-    "namespace"                { return symbol(TokenKinds.KEYWORD,yytext() ); }
+  
     
     "inline"                { return symbol(TokenKinds.KEYWORD,yytext() ); }
     "mutable"                { return symbol(TokenKinds.KEYWORD,yytext() ); }
@@ -119,7 +117,7 @@ IntegerLiteral = [0-9][0-9]* | [0-9][_0-9]*[0-9]
   
     "using"                  { return symbol(TokenKinds.KEYWORD,yytext() ); }
     "this"                   { return symbol(TokenKinds.KEYWORD,yytext() ); }
-    
+    "namespace"                { return symbol(TokenKinds.KEYWORD,yytext() ); }
     "bool"                   { return symbol(TokenKinds.KEYWORD,yytext() ); }
     "break"                  { return symbol(TokenKinds.KEYWORD,yytext() ); }
     "auto"                   { return symbol(TokenKinds.KEYWORD,yytext() ); }

@@ -178,7 +178,7 @@ public class DupDetector {
 		for(Token tok:tokenstream)
 		{
 			tokens.add(tok);
-			System.out.println("Token stored is: " + tok.getType() +" " + tok.getLexeme());
+			System.out.println("Token stored is: " + tok.getType() +" " + tok.getLexeme()+  tok.getColumnNumber());
 		}
 		
 		

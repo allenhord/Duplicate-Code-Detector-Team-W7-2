@@ -96,7 +96,111 @@ public class DupDetectorTest {
 		
 		assertEquals(17,tokens.size());
 		Token t= tokens.get(0);
+		System.out.println("Token scanned in 0 index: "+tokens.get(0).getType() + " "+tokens.get(0).getLexeme());
+		assertEquals(TokenKinds.KEYWORD, t.getType(),"Token scanned in 0 index: "+tokens.get(0).getType() + " "+tokens.get(0).getLexeme());
+		assertEquals("typename", t.getLexeme());
+		assertEquals(5, t.getLineNumber());
+		assertEquals(1,t.getColumnNumber());
 		
+	    t= tokens.get(1);
+		assertEquals(TokenKinds.INTEGER_LITERAL, t.getType());
+		assertEquals("12341239", t.getLexeme());
+		assertEquals(5, t.getLineNumber());
+		assertEquals(11,t.getColumnNumber());
+		
+		
+	    t= tokens.get(2);
+		assertEquals(TokenKinds.IDENTIFIER, t.getType());
+		assertEquals("identif_check", t.getLexeme());
+		assertEquals(5, t.getLineNumber());
+		assertEquals(20,t.getColumnNumber());
+		
+	    t= tokens.get(3);
+		assertEquals(TokenKinds.ACCESS_MODIFIER, t.getType());
+		assertEquals("public", t.getLexeme());
+		assertEquals(5, t.getLineNumber());
+		assertEquals(34,t.getColumnNumber());
+		
+	    t= tokens.get(4);
+		assertEquals(TokenKinds.LITERAL, t.getType());
+		assertEquals("false", t.getLexeme());
+		assertEquals(5, t.getLineNumber());
+		assertEquals(41,t.getColumnNumber());
+		
+		t= tokens.get(5);
+		assertEquals(TokenKinds.STRING_LITERAL, t.getType());
+		assertEquals("\"this is a string\"", t.getLexeme());
+		assertEquals(5, t.getLineNumber());
+		assertEquals(47,t.getColumnNumber());
+		
+		
+	    t= tokens.get(6);
+		assertEquals(TokenKinds.CLASS_DEF, t.getType());
+		assertEquals("class", t.getLexeme());
+		assertEquals(5, t.getLineNumber());
+		assertEquals(66,t.getColumnNumber());
+		
+	    t= tokens.get(7);
+		assertEquals(TokenKinds.VIRT_SPECIFIER, t.getType());
+		assertEquals("final", t.getLexeme());
+		assertEquals(5, t.getLineNumber());
+		assertEquals(72,t.getColumnNumber());
+		
+	    t= tokens.get(8);
+		assertEquals(TokenKinds.QUALIFIER, t.getType());
+		assertEquals("const", t.getLexeme());
+		assertEquals(5, t.getLineNumber());
+		assertEquals(78,t.getColumnNumber());
+
+	    t= tokens.get(9);
+		assertEquals(TokenKinds.UNARY_OPERATOR, t.getType());
+		assertEquals("++", t.getLexeme());
+		assertEquals(5, t.getLineNumber());
+		assertEquals(84,t.getColumnNumber());
+		
+		
+	    t= tokens.get(10);
+		assertEquals(TokenKinds.ASSIGNMENT, t.getType());
+		assertEquals("+=", t.getLexeme());
+		assertEquals(5, t.getLineNumber());
+		assertEquals(87,t.getColumnNumber());
+		
+	    t= tokens.get(11);
+		assertEquals(TokenKinds.PM_OPERATOR, t.getType());
+		assertEquals(".*", t.getLexeme());
+		assertEquals(5, t.getLineNumber());
+		assertEquals(90,t.getColumnNumber());
+		
+	    t= tokens.get(12);
+		assertEquals(TokenKinds.SHIFT_OPERATOR, t.getType());
+		assertEquals(">>", t.getLexeme());
+		assertEquals(5, t.getLineNumber());
+		assertEquals(93,t.getColumnNumber());
+		
+		t= tokens.get(13);
+		assertEquals(TokenKinds.RL_OPERATOR, t.getType());
+		assertEquals("==", t.getLexeme());
+		assertEquals(6, t.getLineNumber());
+		assertEquals(1,t.getColumnNumber());
+		
+		
+	    t= tokens.get(14);
+		assertEquals(TokenKinds.ARITHMETIC_OPERATOR, t.getType());
+		assertEquals("-", t.getLexeme());
+		assertEquals(6, t.getLineNumber());
+		assertEquals(4,t.getColumnNumber());
+		
+	    t= tokens.get(15);
+		assertEquals(TokenKinds.OVERLOADED_LEXEME, t.getType());
+		assertEquals("&", t.getLexeme());
+		assertEquals(6, t.getLineNumber());
+		assertEquals(6,t.getColumnNumber());
+		
+	    t= tokens.get(16);
+		assertEquals(TokenKinds.SEPARATOR, t.getType());
+		assertEquals("->", t.getLexeme());
+		assertEquals(6, t.getLineNumber());
+		assertEquals(8,t.getColumnNumber());
 	
 	}
 
