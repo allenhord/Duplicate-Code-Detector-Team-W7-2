@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
@@ -75,6 +76,28 @@ public class DupDetectorTest {
 			assertTrue(filesFoundInEmptyDir==filecount2);
 		
 		
+	}
+	
+	
+	@Test
+	//testing the ScanFile method in DupDector class  
+	// It should accurately convert a file into tokens 
+	public void testFileScan() {
+		String cppFilePath = "src/test/data/DupDetectorTestDirectory/someCppFile.cpp";
+		File cppFile=new File(cppFilePath);
+		//list of tokens
+		ArrayList<Token> tokens= new ArrayList<Token>();
+		//run this function to store the tokens in that cpp file
+		try {
+			tokens=DupDetector.ScanFile(cppFile);
+		} catch (FileNotFoundException e) {
+			System.out.println("File was not found");
+		}
+		
+		assertEquals(17,tokens.size());
+		Token t= tokens.get(0);
+		
+	
 	}
 
 }

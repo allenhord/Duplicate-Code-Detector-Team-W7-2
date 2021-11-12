@@ -71,9 +71,52 @@ IntegerLiteral = [0-9][0-9]* | [0-9][_0-9]*[0-9]
     "noexcept"               { return symbol(TokenKinds.KEYWORD,yytext() ); }
     "default"                { return symbol(TokenKinds.KEYWORD,yytext() ); }
     "alignas"                { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "alignof"                { return symbol(TokenKinds.KEYWORD,yytext() ); }
+   
+    "asm"                	 { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "atomic_cancel"          { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "atomic_commit"          { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "atomic_noexcept"        { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "bitand"          		 { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "bitor"           		 { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "catch"          		 { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "char8_t"                { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "char16_t"               { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "char32_t"               { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "compl"                  { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "concept"                { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "consteval"              { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "constexpr"              { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "constinit"              { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "const_cast"             { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "co_await"               { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "co_return"              { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "co_yield"               { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "delete"                 { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "dynamic_cast"           { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "enum"                   { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "export"                { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "namespace"                { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    
+    "inline"                { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "mutable"                { return symbol(TokenKinds.KEYWORD,yytext() ); }
+   
+    
     "extern"                 { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "reflexpr"                 { return symbol(TokenKinds.KEYWORD,yytext() ); }
     "typeid"                 { return symbol(TokenKinds.KEYWORD,yytext() ); }
-    "sizeof"                 { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "operator"                 { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "reinterpret_cast"                 { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "requires"                 { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "static_cast"                 { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "synchronized"                 { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "template"                 { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "thread_local"                 { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "throw"                 { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "try"                 { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    "wchar_t"                 { return symbol(TokenKinds.KEYWORD,yytext() ); }
+    
+  
     "using"                  { return symbol(TokenKinds.KEYWORD,yytext() ); }
     "this"                   { return symbol(TokenKinds.KEYWORD,yytext() ); }
     
@@ -112,6 +155,7 @@ IntegerLiteral = [0-9][0-9]* | [0-9][_0-9]*[0-9]
     "protected"             {return symbol(TokenKinds.ACCESS_MODIFIER,yytext() ); }
     "public"                {return symbol(TokenKinds.ACCESS_MODIFIER,yytext() ); }
     "private"				{return symbol(TokenKinds.ACCESS_MODIFIER,yytext() ); }
+    "friend"                { return symbol(TokenKinds.ACCESS_MODIFIER,yytext() ); }
 
     /* Literals */
 
@@ -129,6 +173,7 @@ IntegerLiteral = [0-9][0-9]* | [0-9][_0-9]*[0-9]
 
     "explicit"              {return symbol(TokenKinds.VIRT_SPECIFIER,yytext() ); }
     "final"                 {return symbol(TokenKinds.VIRT_SPECIFIER,yytext() ); }
+    "virtual"                 { return symbol(TokenKinds.VIRT_SPECIFIER,yytext() ); }
 
     /* Qualifiers */
 
@@ -141,6 +186,9 @@ IntegerLiteral = [0-9][0-9]* | [0-9][_0-9]*[0-9]
     "++"                    {return symbol(TokenKinds.UNARY_OPERATOR,yytext() ); }
     "--"                    {return symbol(TokenKinds.UNARY_OPERATOR,yytext() ); }
     "~"                     {return symbol(TokenKinds.UNARY_OPERATOR,yytext() ); }
+    "not"                { return symbol(TokenKinds.UNARY_OPERATOR,yytext() ); }
+    "sizeof"                 { return symbol(TokenKinds.UNARY_OPERATOR,yytext() ); }
+    
 
     /* Assignment */
 
@@ -177,6 +225,19 @@ IntegerLiteral = [0-9][0-9]* | [0-9][_0-9]*[0-9]
     ">="                    {return symbol(TokenKinds.RL_OPERATOR,yytext() ); }
     "<"                     {return symbol(TokenKinds.RL_OPERATOR,yytext() ); }
     ">"                     {return symbol(TokenKinds.RL_OPERATOR,yytext() ); }
+    "not_eq"                     {return symbol(TokenKinds.RL_OPERATOR,yytext() ); }
+    "or"                     {return symbol(TokenKinds.RL_OPERATOR,yytext() ); }
+    "or_eq"                     {return symbol(TokenKinds.RL_OPERATOR,yytext() ); }
+    "xor"                 { return symbol(TokenKinds.RL_OPERATOR,yytext() ); }
+    "xor_eq"                 { return symbol(TokenKinds.RL_OPERATOR,yytext() ); }
+        "&&"                    {return symbol(TokenKinds.RL_OPERATOR,yytext() ); }
+     "&="                    {return symbol(TokenKinds.RL_OPERATOR,yytext() ); }
+     "and"                	 { return symbol(TokenKinds.RL_OPERATOR,yytext() ); }
+    "and_eq"                 { return symbol(TokenKinds.RL_OPERATOR,yytext() ); }
+    
+    
+    
+    
 
     /* Arithmetic Operators */
 
@@ -187,9 +248,10 @@ IntegerLiteral = [0-9][0-9]* | [0-9][_0-9]*[0-9]
 
     /* Overloaded Lexemes */
 
-    "&&"                    {return symbol(TokenKinds.OVERLOADED_LEXEME,yytext() ); }
-    "&"                     {return symbol(TokenKinds.OVERLOADED_LEXEME,yytext() ); }
+
+    
     "*"                     {return symbol(TokenKinds.OVERLOADED_LEXEME,yytext() ); }
+    "&"                     {return symbol(TokenKinds.OVERLOADED_LEXEME,yytext() ); }
 
     /* Separators */
 

@@ -81,6 +81,7 @@ public class DupDetector {
 						
 						//display the path to that file
 						System.out.println(pathString);
+						
 						System.out.println("Tries to scann tokens");
 						try {
 							ArrayList<Token> tokensInFile=ScanFile(currFile);
@@ -89,6 +90,8 @@ public class DupDetector {
 							e.printStackTrace();
 						}
 						System.out.println("Scanned tokens");
+						
+						
 						
 						//increment number of files scanned
 						filesScanned++;
