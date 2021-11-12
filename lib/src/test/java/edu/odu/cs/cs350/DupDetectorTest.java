@@ -97,7 +97,7 @@ public class DupDetectorTest {
 		assertEquals(17,tokens.size());
 		Token t= tokens.get(0);
 		System.out.println("Token scanned in 0 index: "+tokens.get(0).getType() + " "+tokens.get(0).getLexeme());
-		assertEquals(TokenKinds.KEYWORD, t.getType(),"Token scanned in 0 index: "+tokens.get(0).getType() + " "+tokens.get(0).getLexeme());
+		assertEquals(TokenKinds.KEYWORD, t.getType());
 		assertEquals("typename", t.getLexeme());
 		assertEquals(5, t.getLineNumber());
 		assertEquals(1,t.getColumnNumber());

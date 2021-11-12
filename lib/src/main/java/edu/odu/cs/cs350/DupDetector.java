@@ -82,14 +82,13 @@ public class DupDetector {
 						//display the path to that file
 						System.out.println(pathString);
 						
-						System.out.println("Tries to scann tokens");
+
 						try {
 							ArrayList<Token> tokensInFile=ScanFile(currFile);
 						} catch (FileNotFoundException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							System.out.println("File was not found");
 						}
-						System.out.println("Scanned tokens");
+
 						
 						
 						
@@ -115,14 +114,13 @@ public class DupDetector {
 						currentFiles.addFilePathArray(pathString);
 						//display the path to that file
 						System.out.println(pathString);
-						System.out.println("Tries to scann tokens");
+
 						try {
 							ArrayList<Token> tokensInFile=ScanFile(currFile);
 						} catch (FileNotFoundException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							System.out.println("File was not found");
 						}
-						System.out.println("Scanned tokens");
+
 
 						//increment number of files scanned
 						filesScanned++;
@@ -141,8 +139,7 @@ public class DupDetector {
 				try {
 					filesScannedInDir+=recursiveFileSearch(currFile);
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					System.out.println("File was not found");
 				}
 				
 				filesScanned+=filesScannedInDir;
@@ -178,10 +175,7 @@ public class DupDetector {
 		for(Token tok:tokenstream)
 		{
 			tokens.add(tok);
-			System.out.println("Token stored is: " + tok.getType() +" " + tok.getLexeme()+  tok.getColumnNumber());
 		}
-		
-		
 		return tokens;
 	}
 
@@ -211,9 +205,9 @@ public class DupDetector {
 						String filename=file.toString();
 						int index=filename.lastIndexOf('.');
 						String extension= filename.substring(index+1);
-						System.out.println("Tries to scann tokens");
-						ArrayList<Token> tokensInFile=ScanFile(file);
-						System.out.println("Scanned tokens");
+
+						
+
 						if (CppExtensions.contains(extension))
 						{
 							
@@ -222,7 +216,9 @@ public class DupDetector {
 							//display the path to that file
 							System.out.println(filename);
 							//increment number of files scanned
+							
 							fileCount++;
+							ArrayList<Token> tokensInFile=ScanFile(file);
 						}
 
 				}
