@@ -80,6 +80,15 @@ public class SourceCodeFiles {
 			Arrays.asList(filePathArray).stream().forEach(s -> System.out.println(s));}
 		catch (Exception e) {System.out.println("Array is empty!");}
 	}
+	
+	//print individual filePath
+	public void printFilePath(int x) {
+		try {
+			String temp = filePathArray[x];
+			System.out.print(temp);
+		}
+		catch (Exception e) {System.out.println("There's nothing there!");}
+	}
 
 	public boolean containsFilepath(String filepath) {
 		boolean found = false;
@@ -92,6 +101,10 @@ public class SourceCodeFiles {
 		    }
 		}
 		return found;
+	}
+	
+	public String getFilePath(int x) {
+		return this.filePathArray[x];
 	}
 	//add C++ file paths to filePathSet
 	/*

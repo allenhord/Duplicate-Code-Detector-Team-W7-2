@@ -162,8 +162,31 @@ public class DupDetector {
 			
 
 	}	
-		//print absolute filepaths in descending order
-		currentFiles.printFilePathArray();
+		//print absolute filepaths in descending order, along with token count
+		int i;
+		for (i=0; i < currentFiles.getNumCFiles(); i++) {
+			currentFiles.printFilePath(i);
+			String cppFilePathString = currentFiles.getFilePath(i);
+			CFile c = new CFile(cppFilePathString);
+			File cppFile=new File(cppFilePathString);
+			ArrayList<Token> tokens= new ArrayList<Token>();
+			try {
+				tokens=DupDetector.ScanFile(cppFile);
+			} catch (FileNotFoundException e) {
+				System.out.println("File was not found");
+			}
+			c.setRank(i);
+			int size = tokens.size();
+			c.setNumTokens(size);
+			System.out.println(", " + c.getNumTokens());
+		}
+		
+
+		System.out.println();
+		//print absolute filepaths in descending order		
+		//currentFiles.printFilePathArray();
+		
+		
 
 }
 	//method to scan the contents of the file and convert them into tokens 
