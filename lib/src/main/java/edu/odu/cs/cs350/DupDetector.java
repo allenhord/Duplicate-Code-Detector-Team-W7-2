@@ -75,12 +75,11 @@ public class DupDetector {
 					//if it is a file that has extension from CppExtensions then do stuff
 					else if (CppExtensions.contains(extension))
 					{
-	
 						//store filepath to filepatharray & filepathset
 						currentFiles.addFilePathArray(pathString);
 						
 						//display the path to that file
-						System.out.println(pathString);
+						//System.out.println(pathString);
 						
 
 						try {
@@ -113,7 +112,7 @@ public class DupDetector {
 						//store filepath to filepatharray & filepathset
 						currentFiles.addFilePathArray(pathString);
 						//display the path to that file
-						System.out.println(pathString);
+						//System.out.println(pathString);
 
 						try {
 							ArrayList<Token> tokensInFile=ScanFile(currFile);
@@ -147,7 +146,7 @@ public class DupDetector {
 				//display a message if the directory did not have any valid files scanned
 				if(filesScannedInDir==0)
 				{
-					System.out.println ("No valid Files were found in  Directory specified by path: "+ pathString);
+					System.out.println ("No valid Files were found in Directory specified by path: "+ pathString);
 				}
 				
 				//reset the filesScannedInDir counter for any future iterations
@@ -160,9 +159,11 @@ public class DupDetector {
 		
 		 
 			}
+			
 
-	}
-
+	}	
+		//print absolute filepaths in descending order
+		currentFiles.printFilePathArray();
 
 }
 	//method to scan the contents of the file and convert them into tokens 
