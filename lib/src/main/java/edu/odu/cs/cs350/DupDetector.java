@@ -66,7 +66,24 @@ public class DupDetector {
 					
 					if(extension=="ini")
 					{
-						//do something with the properties file
+						FileReader fr = new FileReader(currFile);
+						int i; 
+						while ((i = fr.read()) != -1)
+						//read and set the values for the optional properties
+                        				try {
+                            				MaxSubstitutions=Integer.parseInt(args[currArg]);
+                            				 }
+                       					 //catch and display the error if it is not an int
+                       					 catch(Exception e){
+                           				 System.out.println("Invalid Properties");
+                        				}
+                        				try {
+                            				MinSequenceLength=Integer.parseInt(args[currArg]);
+                             				}
+                        				//catch and display the error if it is not an int
+                        				catch(Exception e){
+                            				System.out.println("Invalid Properties");
+                        				}
 					}
 					//if it is a file that has extension from CppExtensions then do stuff
 					else if (CppExtensions.contains(extension))
