@@ -168,7 +168,8 @@ public class DupDetector {
 			currentFiles.printFilePath(i);
 			String cppFilePathString = currentFiles.getFilePath(i);
 			CFile c = new CFile(cppFilePathString);
-			File cppFile=new File(cppFilePathString);
+			c.setAbsoluteFilePath(cppFilePathString);
+			File cppFile = new File(cppFilePathString);
 			ArrayList<Token> tokens= new ArrayList<Token>();
 			try {
 				tokens=DupDetector.ScanFile(cppFile);

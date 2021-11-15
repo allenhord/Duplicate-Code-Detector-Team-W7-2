@@ -1,9 +1,6 @@
 package edu.odu.cs.cs350;
 import java.util.*;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.Reader;
 
 public class SourceCodeFiles {
 
@@ -54,9 +51,9 @@ public class SourceCodeFiles {
 			String absFilepath = tempFile.getAbsolutePath();
 			boolean filePresent = false;
 
-			if (this.filePathArray == null) {
+			if (this.filePathArray == null) {//searching an empty array causes problems
 			}
-			else if (containsFilepath(absFilepath)) {
+			else if (containsFilepath(absFilepath)) {//check if filepath is already in filePathArray
 				//System.out.println(absFilepath + " already in array!");
 				filePresent = true;
 			}
@@ -75,13 +72,15 @@ public class SourceCodeFiles {
 	//this.addFilePaths(filepath);
 
 	//print each entry in filePathArray on new line
+	/*
 	public void printFilePathArray() {
 		try {
 			Arrays.asList(filePathArray).stream().forEach(s -> System.out.println(s));}
 		catch (Exception e) {System.out.println("Array is empty!");}
 	}
+	*/
 	
-	//print individual filePath
+	//print an individual filePath
 	public void printFilePath(int x) {
 		try {
 			String temp = filePathArray[x];
@@ -90,6 +89,7 @@ public class SourceCodeFiles {
 		catch (Exception e) {System.out.println("There's nothing there!");}
 	}
 
+	//check if a filepath exists in filePathArray
 	public boolean containsFilepath(String filepath) {
 		boolean found = false;
 		String searchedValue = filepath;

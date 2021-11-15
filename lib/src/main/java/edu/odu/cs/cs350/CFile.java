@@ -15,6 +15,14 @@ public class CFile {
 		this.absoluteFilePath = path;
 	}
 	
+	public void setAbsoluteFilePath(String path) {
+		this.absoluteFilePath = path;
+	}
+	
+	public String getAbsoluteFilePath() {
+		return this.absoluteFilePath;
+	}
+	//order of CFile in array
 	public void setRank(int x) {
 		this.rank = x;
 	}
