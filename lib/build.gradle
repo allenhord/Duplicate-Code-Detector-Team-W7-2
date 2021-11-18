@@ -18,11 +18,9 @@ plugins {
    id 'java'
    id "org.xbib.gradle.plugin.git" version "2.0.0"
    id "org.jbake.site" version "5.5.0"
-   id 'maven-publish'
    id 'java-gradle-plugin'
     id 'project-report'
-    id 'java-library'
-    id 'signing'
+
     
    
 }
@@ -43,83 +41,6 @@ configurations{
 	jar.archiveName='DupDetector.jar'
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId = 'my-library'
-            from components.java
-            versionMapping {
-                usage('java-api') {
-                    fromResolutionOf('runtimeClasspath')
-                }
-                usage('java-runtime') {
-                    fromResolutionResult()
-                }
-            }
-            pom {
-                name = 'FlatImitation'
-                description = 'A concise description of my library'
-                url = 'https://github.com/araziODU/flatimi.git'
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id = 'arazi002'
-                        name = 'Alexander Razikov'
-                        email = 'arazi00@odu.edu'
-                    }
-                }
-              
-            }
-        }
-        
-    }
-    afterEvaluate {
-            publications {
-                withType(MavenPublication) {
-                // customize all publications here
-                    pom {
-                        name = 'CoWeM'
-                        description = 'A static site generator for course websites from MarkDown.'
-                        url = 'https://github.com/sjzeil/CoWeM'
-                        licenses {
-                            license {
-                                name = 'MIT License'
-                                url = 'https://github.com/sjzeil/CoWeM/blob/main/LICENSE.txt'
-                            }
-                        }
-                        developers {
-                            developer {
-                                id = "sjzeil"
-                                name = 'Steven Zeil'
-                                email = 'zeil@cs.odu.edu'
-                            }
-                        }
-                        scm {
-                            connection = 'scm:git:https://github.com/sjzeil/CoWeM.git'
-                            developerConnection = 'scm:git:ssh:git@github.com:sjzeil/CoWeM.git'
-                            url = 'https://github.com/sjzeil/CoWeM'
-                        }
-                    }
-                }
-            }
-        }
-    repositories {
-        maven {
-            // change URLs to point to your repos, e.g. http://my.org/repo
-           name="oducs"
-            url = layout.buildDirectory.dir("repo")
-        }
-    }
-}
-
-signing {
-    sign publishing.publications.mavenJava
-}
 
 
 javadoc {
