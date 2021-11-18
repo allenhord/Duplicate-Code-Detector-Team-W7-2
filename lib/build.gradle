@@ -116,8 +116,7 @@ task copyReports (type: Copy, dependsOn: ['reports', 'clonePages']) {
 }
 
 task deployReports (dependsOn: 'copyReports') {
-    group = "Reporting"
-    description  'Copies reports to the gh-pages branch in preparation for a future push to GitHub'
+
     /*
     doLast {
 
@@ -129,11 +128,12 @@ task deployReports (dependsOn: 'copyReports') {
         grgit.add (update: true, patterns: ['reports/'])
         
      */
+     /*
         exec{
-        	commandLine "git","add","reports/"
-           commandLine "git","commit", "-a", "-m", "\"deploying reports\""
+        	workingDir "build/gh-pages"
+        	
         }
-        
+        */
         /*
         grgit.commit {
             message = "Updating web pages"
@@ -143,6 +143,8 @@ task deployReports (dependsOn: 'copyReports') {
         
          exec {
            workingDir "build/gh-pages"
+           commandLine "git","add","-f","-all"
+           commandLine "git","commit", "-a", "-m", "\"deploying reports\""
            commandLine "git","push"
          }
         //grgit.push{}
