@@ -6,12 +6,223 @@
  * User Manual available at https://docs.gradle.org/6.8/userguide/building_java_projects.html
  */
 
+
+
+
+buildscript {
+  repositories { mavenCentral() }
+  dependencies { classpath 'org.ajoberstar:gradle-git:0.2.3'
+  				classpath "com.github.fracpete:rsync4j-all:3.1.2-15" }
+}
+plugins {
+   id 'java'
+   id "org.xbib.gradle.plugin.git" version "2.0.0"
+   id "org.jbake.site" version "5.5.0"
+   id 'maven-publish'
+   id 'java-gradle-plugin'
+    id 'project-report'
+    id 'java-library'
+    id 'signing'
+    
+   
+}
+import org.ajoberstar.gradle.git.tasks.*;
+import com.github.fracpete.rsync4j.RSync;  
+import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
+
+group = 'edu.odu.cs.cs350'
+
+version = '1.0'
+java {
+    withJavadocJar()
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.toVersion(11)
+    targetCompatibility = JavaVersion.toVersion(11)
+}
+configurations{
+	jar.archiveName='DupDetector.jar'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'my-library'
+            from components.java
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = 'FlatImitation'
+                description = 'A concise description of my library'
+                url = 'https://github.com/araziODU/flatimi.git'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'arazi002'
+                        name = 'Alexander Razikov'
+                        email = 'arazi00@odu.edu'
+                    }
+                }
+              
+            }
+        }
+        
+    }
+    afterEvaluate {
+            publications {
+                withType(MavenPublication) {
+                // customize all publications here
+                    pom {
+                        name = 'CoWeM'
+                        description = 'A static site generator for course websites from MarkDown.'
+                        url = 'https://github.com/sjzeil/CoWeM'
+                        licenses {
+                            license {
+                                name = 'MIT License'
+                                url = 'https://github.com/sjzeil/CoWeM/blob/main/LICENSE.txt'
+                            }
+                        }
+                        developers {
+                            developer {
+                                id = "sjzeil"
+                                name = 'Steven Zeil'
+                                email = 'zeil@cs.odu.edu'
+                            }
+                        }
+                        scm {
+                            connection = 'scm:git:https://github.com/sjzeil/CoWeM.git'
+                            developerConnection = 'scm:git:ssh:git@github.com:sjzeil/CoWeM.git'
+                            url = 'https://github.com/sjzeil/CoWeM'
+                        }
+                    }
+                }
+            }
+        }
+    repositories {
+        maven {
+            // change URLs to point to your repos, e.g. http://my.org/repo
+           name="oducs"
+            url = layout.buildDirectory.dir("repo")
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
+
+
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+repositories {
+    jcenter()
+    mavenLocal()
+    maven{
+     url "https://plugins.gradle.org/m2/"
+    }
+    
+  
+   
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0' 
+    testImplementation 'org.hamcrest:hamcrest-library:2.2'
+}
+
+test { 
+    ignoreFailures = true
+    useJUnitPlatform()
+}
+
+task reports2 (dependsOn: ['javadoc', 'test']) {
+    description 'Generate all reports for this project'
+}
+
+task copyWebPages (type: Copy) {
+    from 'src/main/html'
+    into 'build/reports'
+}
+
+task copyDocs (type: Copy) {
+    from 'build/docs'
+    into 'build/reports/docs'
+    dependsOn 'javadoc'
+}
+
+task reports (dependsOn: [ 'javadoc', 'check',
+    'copyWebPages', 'copyDocs']) {
+    description 'Generate all reports for this project'
+    group 'Reporting'
+   }
+
+task clonePages() {
+    doLast {
+        mkdir 'build/gh-pages'
+        def thisRepo = rootProject.projectDir.toString()
+        def pagesDir = "$buildDir/gh-pages"
+        project.delete {
+            delete pagesDir
+        }
+        def grgit = git.clone {
+            dir = pagesDir
+            uri = 'file:' + thisRepo
+            remote = 'gh-pages'
+            bare = false
+            refToCheckout = 'gh-pages'
+        }
+        grgit.checkout {branch ='gh-pages'}
+        
+    }
+}
+
+task copyReports (type: Copy, dependsOn: ['reports', 'clonePages']) {
+    from "$buildDir/reports"
+    into "$buildDir/gh-pages/reports"
+}
+
+task deployreports (dependsOn: 'copyReports') {
+    group = "Reporting"
+    description  'Copies reports to the gh-pages branch in preparation for a future push to GitHub'
+    doLast {
+
+        def pagesDir = "$buildDir/gh-pages"
+        def grgit = git.open {
+            dir = pagesDir + "/.git"
+        }
+        grgit.add (update: false, patterns: ['reports/'])
+        grgit.add (update: true, patterns: ['reports/'])
+        grgit.commit {
+            message = "Updating web pages"
+        }
+         
+        grgit.push{}
+    }
+}
+
+/*
 plugins {
     // Apply the java-library plugin for API and implementation separation.
+     id 'java'
     id 'java-library'
-    id 'java'
+   
     id "org.xbib.gradle.plugin.jflex" version "1.5.0"
 }
+
+
 
 repositories {
     // Use JCenter for resolving dependencies.
@@ -40,3 +251,4 @@ jar{
 				)
 			}
 	} 
+	*/
