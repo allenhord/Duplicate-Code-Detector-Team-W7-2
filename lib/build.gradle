@@ -127,8 +127,13 @@ task deployReports (dependsOn: 'copyReports') {
         grgit.add (update: false, patterns: ['reports/'])
         grgit.add (update: true, patterns: ['reports/'])
         
+        exec
+        {
+         workingDir "build/gh-pages"
+         commandLine "git","add"
+        }
         exec{
-        	
+        	commandLine "git","add","-all"
            commandLine "git","commit", "-a", "-m", "\"deploying reports\""
         }
         
