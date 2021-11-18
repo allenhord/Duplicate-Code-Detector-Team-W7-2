@@ -130,7 +130,7 @@ task deployReports (dependsOn: 'copyReports') {
         
      */
         exec{
-        	commandLine "git","add","reports"
+        	commandLine "git","add","reports/"
            commandLine "git","commit", "-a", "-m", "\"deploying reports\""
         }
         
