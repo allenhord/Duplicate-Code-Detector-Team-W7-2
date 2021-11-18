@@ -30,3 +30,4 @@ hs_err_pid*
 /build/
 .classpath
 /.gradle/
+**/.DS_Store
