@@ -20,7 +20,7 @@ plugins {
    id "org.jbake.site" version "5.5.0"
    id 'java-gradle-plugin'
     id 'project-report'
-
+	id "org.xbib.gradle.plugin.jflex" version "1.5.0"
     
    
 }
@@ -115,7 +115,7 @@ task copyReports (type: Copy, dependsOn: ['reports', 'clonePages']) {
     into "$buildDir/gh-pages/reports"
 }
 
-task deployreports (dependsOn: 'copyReports') {
+task deployReports (dependsOn: 'copyReports') {
     group = "Reporting"
     description  'Copies reports to the gh-pages branch in preparation for a future push to GitHub'
     doLast {
@@ -126,11 +126,24 @@ task deployreports (dependsOn: 'copyReports') {
         }
         grgit.add (update: false, patterns: ['reports/'])
         grgit.add (update: true, patterns: ['reports/'])
+        
+        exec{
+        	
+           commandLine "git","commit", "-a", "-m", "\"deploying reports\""
+        }
+        
+        /*
         grgit.commit {
             message = "Updating web pages"
         }
-         
-        grgit.push{}
+        */
+        
+        
+         exec {
+           workingDir "build/gh-pages"
+           commandLine "git","push"
+         }
+        //grgit.push{}
     }
 }
 
