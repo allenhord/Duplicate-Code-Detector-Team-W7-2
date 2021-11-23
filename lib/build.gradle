@@ -117,9 +117,9 @@ task copyReports (type: Copy, dependsOn: ['reports', 'clonePages']) {
 
 task deployReports (dependsOn: 'copyReports') {
 
-    /*
+   
     doLast {
-
+ /*
         def pagesDir = "$buildDir/gh-pages"
         def grgit = git.open {
             dir = pagesDir + "/.git"
@@ -128,65 +128,48 @@ task deployReports (dependsOn: 'copyReports') {
         grgit.add (update: true, patterns: ['reports/'])
         
      */
-     /*
+     
+			def pagesDir = "$buildDir/gh-pages"
+        def grgit = git.open {
+            dir = pagesDir //+ "/.git" 
+            }    
         exec{
         	workingDir "build/gh-pages"
-        	
+        	commandLine "git","add","reports"
         }
-        */
-        /*
+        
+        
         grgit.commit {
-            message = "Updating web pages"
+            message = "Updating web pages 2"
+        }
+        
+        
+       
+	 exec{
+        	workingDir "build/gh-pages/"
+        	commandLine "git","status"
+        }
+         exec {
+           workingDir "build/gh-pages/"
+           //commandLine "git","add","-all"
+          // commandLine "git","commit", "-a", "-m", "\"deploying reports\""
+           commandLine "git","push","--all"
+         }
+         
+          exec{
+        	workingDir "build/gh-pages/"
+        	commandLine "git","status"
+        }
+         
+         /*
+        grgit.push{
+        	//dir = pagesDir
+           // uri = 'file:' + thisRepo
+        	//remote='gh-pages'
+        	all=true
         }
         */
-        
-        
-         exec {
-           workingDir "build/gh-pages"
-           commandLine "git","add","-f","-all"
-           commandLine "git","commit", "-a", "-m", "\"deploying reports\""
-           commandLine "git","push"
-         }
-        //grgit.push{}
+        }
     
 }
 
-/*
-plugins {
-    // Apply the java-library plugin for API and implementation separation.
-     id 'java'
-    id 'java-library'
-   
-    id "org.xbib.gradle.plugin.jflex" version "1.5.0"
-}
-
-
-
-repositories {
-    // Use JCenter for resolving dependencies.
-    jcenter()
-}
-
-dependencies {
-    // Use JUnit test framework.
-    testImplementation 'junit:junit:4.13'
-
-    // This dependency is exported to consumers, that is to say found on their compile classpath.
-    api 'org.apache.commons:commons-math3:3.6.1'
-
-    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation 'com.google.guava:guava:29.0-jre'
-}
-
-configurations{
-	jar.archiveName='DupDetector.jar'
-}
-
-jar{
-	manifest{
-		attributes(
-				'Main-Class' : 'edu.odu.cs.cs350.DupDetector'
-				)
-			}
-	} 
-	*/
