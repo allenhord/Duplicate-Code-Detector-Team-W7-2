@@ -6,36 +6,176 @@
  * User Manual available at https://docs.gradle.org/6.8/userguide/building_java_projects.html
  */
 
+
+
+
+buildscript {
+  repositories { mavenCentral() }
+  dependencies { classpath 'org.ajoberstar:gradle-git:0.2.3'
+  				classpath "com.github.fracpete:rsync4j-all:3.1.2-15" }
+}
 plugins {
-    // Apply the java-library plugin for API and implementation separation.
-    id 'java-library'
-    id 'java'
+   id 'java'
+   id "org.xbib.gradle.plugin.git" version "2.0.0"
+   id "org.jbake.site" version "5.5.0"
+   id 'java-gradle-plugin'
+   id 'project-report'
+   id "org.xbib.gradle.plugin.jflex" version "1.5.0"
+   id 'pmd' // and/or checkstyle, jacoco, spotbugs
+   id 'edu.odu.cs.report_accumulator' version '1.4'
+    
+   
 }
+import org.ajoberstar.gradle.git.tasks.*;
+import com.github.fracpete.rsync4j.RSync;  
+import com.github.fracpete.processoutput4j.output.ConsoleOutputProcessOutput;
 
-repositories {
-    // Use JCenter for resolving dependencies.
-    jcenter()
+group = 'edu.odu.cs.cs350'
+
+version = '1.0'
+java {
+    withJavadocJar()
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.toVersion(11)
+    targetCompatibility = JavaVersion.toVersion(11)
 }
-
-dependencies {
-    // Use JUnit test framework.
-    testImplementation 'junit:junit:4.13'
-
-    // This dependency is exported to consumers, that is to say found on their compile classpath.
-    api 'org.apache.commons:commons-math3:3.6.1'
-
-    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation 'com.google.guava:guava:29.0-jre'
-}
-
 configurations{
 	jar.archiveName='DupDetector.jar'
 }
 
-jar{
-	manifest{
-		attributes(
-				'Main-Class' : 'edu.odu.cs.cs350.DupDetector'
-				)
-			}
-	} 
+
+
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
+repositories {
+    jcenter()
+    mavenLocal()
+    maven{
+     url "https://plugins.gradle.org/m2/"
+    }
+    
+  
+   
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0' 
+    testImplementation 'org.hamcrest:hamcrest-library:2.2'
+}
+
+test { 
+    ignoreFailures = true
+    useJUnitPlatform()
+}
+
+task reports2 (dependsOn: ['javadoc', 'test']) {
+    description 'Generate all reports for this project'
+}
+
+task copyWebPages (type: Copy) {
+    from 'src/main/html'
+    into 'build/reports'
+}
+
+task copyDocs (type: Copy) {
+    from 'build/docs'
+    into 'build/reports/docs'
+    dependsOn 'javadoc'
+}
+
+task reports (dependsOn: [ 'javadoc', 'check',
+    'copyWebPages', 'copyDocs']) {
+    description 'Generate all reports for this project'
+    group 'Reporting'
+   }
+
+task clonePages() {
+    doLast {
+        mkdir 'build/gh-pages'
+        def thisRepo = rootProject.projectDir.toString()
+        def pagesDir = "$buildDir/gh-pages"
+        project.delete {
+            delete pagesDir
+        }
+        def grgit = git.clone {
+            dir = pagesDir
+            uri = 'file:' + thisRepo
+            remote = 'gh-pages'
+            bare = false
+            refToCheckout = 'gh-pages'
+        }
+        grgit.checkout {branch ='gh-pages'}
+        
+    }
+}
+
+task copyReports (type: Copy, dependsOn: ['reports', 'clonePages']) {
+    from "$buildDir/reports"
+    into "$buildDir/gh-pages/reports"
+}
+
+task deployReports (dependsOn: 'copyReports') {
+
+   
+    doLast {
+ /*
+        def pagesDir = "$buildDir/gh-pages"
+        def grgit = git.open {
+            dir = pagesDir + "/.git"
+        }
+        grgit.add (update: false, patterns: ['reports/'])
+        grgit.add (update: true, patterns: ['reports/'])
+        
+     */
+     
+			def pagesDir = "$buildDir/gh-pages"
+        def grgit = git.open {
+            dir = pagesDir //+ "/.git" 
+            }    
+        exec{
+        	workingDir "build/gh-pages"
+        	commandLine "git","add","reports"
+        }
+        
+        
+        grgit.commit {
+            message = "Updating web pages 2"
+        }
+        
+        
+       
+	 exec{
+        	workingDir "build/gh-pages/"
+        	commandLine "git","status"
+        }
+         exec {
+           workingDir "build/gh-pages/"
+           //commandLine "git","add","-all"
+          // commandLine "git","commit", "-a", "-m", "\"deploying reports\""
+           commandLine "git","push","--all"
+         }
+         
+          exec{
+        	
+        	commandLine "git","push","--all"
+        }
+         
+         /*
+        grgit.push{
+        	//dir = pagesDir
+           // uri = 'file:' + thisRepo
+        	//remote='gh-pages'
+        	all=true
+        }
+        */
+        }
+    	reportStats {
+    		reportsURL = 'https://project/reports/url/'
+    		htmlSourceDir = file('src/main/html')  // default value
+    		reportsDir = file('build/reports') // default value
+    		buildID = "12345"                  // defaults to current date, but can be any run identifier
+}
+}
