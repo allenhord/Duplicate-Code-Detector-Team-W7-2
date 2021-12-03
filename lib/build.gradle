@@ -119,6 +119,7 @@ task clonePages() {
             refToCheckout = 'gh-pages'
         }
         grgit.checkout {branch ='gh-pages'}
+     
         
     }
 }
