@@ -2,4 +2,4 @@
 
 
 * [Tests](./reports/tests/test/)
-* [JavaDoc](./docs/javadoc/)
+* [JavaDoc](./reports/docs/javadoc/)
