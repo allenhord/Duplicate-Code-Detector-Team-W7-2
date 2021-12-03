@@ -20,4 +20,4 @@ jobs:
       run: chmod +x gradlew              
     - name: deploy reports
       timeout-minutes: 20
-      run: ./gradlew deployReports
+      run: gradle deployReports
