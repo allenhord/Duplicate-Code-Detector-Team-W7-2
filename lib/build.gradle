@@ -21,6 +21,8 @@ plugins {
    id 'java-gradle-plugin'
     id 'project-report'
 	id "org.xbib.gradle.plugin.jflex" version "1.5.0"
+	
+    id 'edu.odu.cs.report_accumulator' version '1.4' 
     
    
 }
@@ -43,11 +45,15 @@ configurations{
 
 
 
-javadoc {
+ javadoc {
     if(JavaVersion.current().isJava9Compatible()) {
         options.addBooleanOption('html5', true)
     }
+    source=sourceSets.main.allJava
+   
 }
+
+
 repositories {
     jcenter()
     mavenLocal()
@@ -67,6 +73,13 @@ dependencies {
 test { 
     ignoreFailures = true
     useJUnitPlatform()
+}
+
+reportStats {
+    reportsURL = 'https://allenhord.github.io/Duplicate-Code-Detector-Team-W7-2/'
+    htmlSourceDir = file('src/main/html')  // default value
+    reportsDir = file('$buildDir/reports') // default value
+    buildID = "12345"                  // defaults to current date, but can be any run identifier
 }
 
 task reports2 (dependsOn: ['javadoc', 'test']) {
@@ -128,7 +141,7 @@ task deployReports (dependsOn: 'copyReports') {
         grgit.add (update: true, patterns: ['reports/'])
         
      */
-     
+     	
 			def pagesDir = "$buildDir/gh-pages"
         def grgit = git.open {
             dir = pagesDir //+ "/.git" 
