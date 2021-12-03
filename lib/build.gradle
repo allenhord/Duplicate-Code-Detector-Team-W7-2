@@ -21,7 +21,9 @@ plugins {
    id 'java-gradle-plugin'
     id 'project-report'
 	id "org.xbib.gradle.plugin.jflex" version "1.5.0"
-	
+	id 'jacoco'
+
+	id 'pmd'
     id 'edu.odu.cs.report_accumulator' version '1.4' 
     
    
@@ -73,14 +75,32 @@ dependencies {
 test { 
     ignoreFailures = true
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport{
+	dependsOn test
+	
+	reports{
+		xml.required= false
+		csv.required=false
+		html.outputLocation= layout.buildDirectory.dir('jacocoHtml')
+	}
 }
 
 reportStats {
     reportsURL = 'https://allenhord.github.io/Duplicate-Code-Detector-Team-W7-2/'
-    htmlSourceDir = file('src/main/html')  // default value
-    reportsDir = file('$buildDir/reports') // default value
-    buildID = "12345"                  // defaults to current date, but can be any run identifier
+    htmlSourceDir = file('build/reports')  // default value
+    reportsDir = file('build/reports') // default value
+  //  buildID = "12345"                  // defaults to current date, but can be any run identifier
 }
+pmdMain{
+	ignoreFailures=true
+	consoleOutput=false
+}
+
+pmdTest.enabled=false
+test.ignoreFailures=true
 
 task reports2 (dependsOn: ['javadoc', 'test']) {
     description 'Generate all reports for this project'
@@ -90,6 +110,11 @@ task copyWebPages (type: Copy) {
     from 'src/main/html'
     into 'build/reports'
 }
+task copyJacocoTest(type: Copy){
+	from 'build/jacocoHtml'
+	into 'build/reports/jacoco'
+	dependsOn 'jacocoTestReport'
+}
 
 task copyDocs (type: Copy) {
     from 'build/docs'
@@ -98,7 +123,7 @@ task copyDocs (type: Copy) {
 }
 
 task reports (dependsOn: [ 'javadoc', 'check',
-    'copyWebPages', 'copyDocs']) {
+    'copyWebPages', 'copyDocs','copyJacocoTest']) {
     description 'Generate all reports for this project'
     group 'Reporting'
    }
@@ -129,7 +154,7 @@ task copyReports (type: Copy, dependsOn: ['reports', 'clonePages']) {
     into "$buildDir/gh-pages/reports"
 }
 
-task deployReports (dependsOn: 'copyReports') {
+task deployReports (dependsOn: ['copyReports','reportStats']) {
 
    
     doLast {
@@ -154,7 +179,7 @@ task deployReports (dependsOn: 'copyReports') {
         
         
         grgit.commit {
-            message = "Updating web pages 2"
+            message = "Updating web pages 3"
         }
         
         
