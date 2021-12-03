@@ -213,11 +213,13 @@ public class DupDetectorTest {
 	public void testNumberSuggstionCheck() {
 		//create an array of arguments
 
-		String negativeargs[]= {"-1","2","string"};
+		String negativeargs[]= {"-1","2","string","0","1.23"};
 
 		assertFalse(DupDetector.numberSuggstionCheck(negativeargs[0]));
 		assertTrue(DupDetector.numberSuggstionCheck(negativeargs[1]));
 		assertFalse(DupDetector.numberSuggstionCheck(negativeargs[2]));
+		assertFalse(DupDetector.numberSuggstionCheck(negativeargs[3]));
+		assertFalse(DupDetector.numberSuggstionCheck(negativeargs[4]));
 		
 	}
 	
