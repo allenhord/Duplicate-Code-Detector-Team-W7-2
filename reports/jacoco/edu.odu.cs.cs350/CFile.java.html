@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CFile.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">lib</a> &gt; <a href="index.source.html" class="el_package">edu.odu.cs.cs350</a> &gt; <span class="el_source">CFile.java</span></div><h1>CFile.java</h1><pre class="source lang-java linenums">package edu.odu.cs.cs350;
+
+public class CFile {
+
+	private String absoluteFilePath;
+	
+	private int numTokens;
+	
+	private int rank;
+	
+<span class="fc" id="L11">	public CFile() {</span>
+<span class="fc" id="L12">	}</span>
+	
+<span class="fc" id="L14">	public CFile(String path) {</span>
+<span class="fc" id="L15">		this.absoluteFilePath = path;</span>
+<span class="fc" id="L16">	}</span>
+	
+	public void setAbsoluteFilePath(String path) {
+<span class="fc" id="L19">		this.absoluteFilePath = path;</span>
+<span class="fc" id="L20">	}</span>
+	
+	public String getAbsoluteFilePath() {
+<span class="fc" id="L23">		return this.absoluteFilePath;</span>
+	}
+	//order of CFile in array
+	public void setRank(int x) {
+<span class="fc" id="L27">		this.rank = x;</span>
+<span class="fc" id="L28">	}</span>
+	
+	public int getRank() {
+<span class="fc" id="L31">		return rank;</span>
+	}
+	
+	public void setNumTokens(int x) {
+<span class="fc" id="L35">		this.numTokens = x;</span>
+<span class="fc" id="L36">	}</span>
+	
+	public int getNumTokens() {
+<span class="fc" id="L39">		return numTokens;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
