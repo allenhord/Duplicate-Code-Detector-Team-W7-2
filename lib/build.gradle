@@ -164,7 +164,7 @@ task deployReports (dependsOn: 'copyReports') {
         	commandLine "git","status"
         }
          exec {
-           workingDir "build/gh-pages/"
+           workingDir "$buildDir/gh-pages/"
            //commandLine "git","add","-all"
           // commandLine "git","commit", "-a", "-m", "\"deploying reports\""
            commandLine "git","push","--all"
