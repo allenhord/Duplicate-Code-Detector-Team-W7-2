@@ -37,14 +37,15 @@ public class DupDetector {
 		
 			if(currArg==0)
 			{
-				try {
+				boolean validNumber= numberSuggstionCheck(args[currArg]);
+				if(validNumber==true) {
 					currentFiles.setNumSuggestions(Integer.parseInt(args[currArg]));
 					
 				}
-				//catch the error and exit if it is not an int
-				catch(Exception e)
+				//catch the error and exit if it is not a valid int
+				else
 				{
-					System.out.println("Not an Integer, Expected an integer for number of suggested refactorings as the first input. Ending program");
+					System.out.println("Invalid input for number of suggestions. ");
 					System.exit(1);
 				}
 			}
@@ -190,6 +191,31 @@ public class DupDetector {
 		
 
 }
+	
+	//method to scan the first parameter as number of suggestions
+	public static boolean numberSuggstionCheck(String inputString)
+	{
+		int integerValue=-1;
+		boolean retBool=true;
+		try {
+			 integerValue=Integer.parseInt(inputString);
+			
+		}
+		//catch the error and exit if it is not an int
+		catch(Exception e)
+		{
+			retBool=false;
+		}
+		
+		//check that the number of suggestions is greater than 0 exit the program
+		
+		if(integerValue<=0)
+		{
+			retBool=false;
+		}
+		
+		return retBool;
+	}
 	//method to scan the contents of the file and convert them into tokens 
 	//@return returns the list of tokens
 	public static ArrayList<Token> ScanFile(File infile) throws FileNotFoundException

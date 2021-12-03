@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -203,5 +204,22 @@ public class DupDetectorTest {
 		assertEquals(8,t.getColumnNumber());
 	
 	}
+	
+	
+	
+	@Test
+	//testing the ScanFile method in DupDector class  
+	// It should accurately convert a file into tokens 
+	public void testNumberSuggstionCheck() {
+		//create an array of arguments
+
+		String negativeargs[]= {"-1","2","string"};
+
+		assertFalse(DupDetector.numberSuggstionCheck(negativeargs[0]));
+		assertTrue(DupDetector.numberSuggstionCheck(negativeargs[1]));
+		assertFalse(DupDetector.numberSuggstionCheck(negativeargs[2]));
+		
+	}
+	
 
 }
