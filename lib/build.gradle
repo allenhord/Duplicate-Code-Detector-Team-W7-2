@@ -70,6 +70,7 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.0' 
     testImplementation 'org.hamcrest:hamcrest-library:2.2'
+    compile "org.ini4j:ini4j:0.5.4"
 }
 
 test { 
