@@ -1,10 +1,15 @@
 package edu.odu.cs.cs350;
+import org.ini4j.Ini;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.Reader;
+import java.io.IOException;
+import org.ini4j.InvalidFileFormatException;
+
 public class DupDetector {
 
 	 //Driver class with the main method
@@ -52,28 +57,54 @@ public class DupDetector {
 			
 			
 			else {
-			
-			//if it is the second argument then there is a possibility of it being the properties file
-			
-			File currFile=new File(args[currArg]);
-			String pathString=currFile.toString();
-			
-			//this is only for the first file check
-			if(currFile.exists() && currFile.isFile() && currArg==1 )
-			{
-				//this is for the optional properties file check
-				//check the length of the file that it at least has the extension there 
-				if(pathString.length()>4)
+
+				//if it is the second argument then there is a possibility of it being the properties file
+
+				File currFile=new File(args[currArg]);
+				String pathString=currFile.toString();
+
+				//this is only for the first file check
+				if(currFile.exists() && currFile.isFile() && currArg==1 )
 				{
-					//get the extension check
-					int index=pathString.lastIndexOf('.');
-					String extension= pathString.substring(index+1);
-					
-					if(extension=="ini")
+					//this is for the optional properties file check
+					//check the length of the file that it at least has the extension there 
+					if(pathString.length()>4)
 					{
-						//do something with the properties file
-					}
-					//if it is a file that has extension from CppExtensions then do stuff
+						//get the extension check
+						int index=pathString.lastIndexOf('.');
+						String extension= pathString.substring(index+1);
+
+						if (extension.contains("ini"))
+						{
+							//System.out.println("ini read successfully");
+							try {
+								Ini ini = new Ini(new File(pathString));
+								String Extensions = ini.get("cpp", "CppExtensions");
+								//System.out.println(Extensions);
+								String[] arrExtensions = Extensions.split(",", 0);
+								CppExtensions.clear();
+								for (String i : arrExtensions)
+								{
+									CppExtensions.add(i);
+
+								}
+
+								/*
+								for (String i : CppExtensions) {
+									System.out.println(i);
+
+								}*/
+
+
+							}
+							catch (InvalidFileFormatException e) {
+								System.out.println("Invalid file format.");
+							}
+							catch (IOException e) {
+								System.out.println("Problem reading file.");
+							}		
+						}
+						//if it is a file that has extension from CppExtensions then do stuff
 					else if (CppExtensions.contains(extension))
 					{
 						//store filepath to filepatharray & filepathset
