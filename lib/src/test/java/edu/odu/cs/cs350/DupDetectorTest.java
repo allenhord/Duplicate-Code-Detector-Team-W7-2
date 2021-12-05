@@ -35,7 +35,7 @@ public class DupDetectorTest {
 	// It should accurately count the .cpp and.h files
 	public void testDirRecursion() {
 		//create the path to the resources folder
-		String path = "src/test/data";
+		String path = "lib/src/test/data";
 		File dirFile= new File(path);
 		//create the file directory
 		//and add extensions to check for valid 
@@ -84,7 +84,7 @@ public class DupDetectorTest {
 	//testing the ScanFile method in DupDector class  
 	// It should accurately convert a file into tokens 
 	public void testFileScan() {
-		String cppFilePath = "src/test/data/DupDetectorTestDirectory/someCppFile.cpp";
+		String cppFilePath = "lib/src/test/data/DupDetectorTestDirectory/someCppFile.cpp";
 		File cppFile=new File(cppFilePath);
 		//list of tokens
 		ArrayList<Token> tokens= new ArrayList<Token>();
@@ -223,5 +223,34 @@ public class DupDetectorTest {
 		
 	}
 	
+	@Test
+	//testing the optional properties .ini file
+	public void testPropertiesFile() {
+		assertEquals(10, DupDetector.MinSequenceLength);
+		assertEquals(8, DupDetector.MaxSubstitutions);
+		
+		String iniFilePath = "lib/src/test/data/DupDetectorTestDirectory/propertiesFile.ini";
+		String dneFilePath = "lib/src/test/data/DupDetectorTestDirectory/dnePropertiesFile.ini";
+		String illegalFilePath = "lib/src/test/data/DupDetectorTestDirectory/illegalPropertiesFile.ini";
+		
+		
+		assertTrue(DupDetector.iniParse(iniFilePath));
+		assertFalse(DupDetector.iniParse(dneFilePath));
+		assertFalse(DupDetector.iniParse(illegalFilePath));
+		
+		DupDetector.iniParse(iniFilePath);
+
+		
+		assertTrue(DupDetector.CppExtensions.contains("C"));
+		assertTrue(DupDetector.CppExtensions.contains("cpp"));
+		assertTrue(DupDetector.CppExtensions.contains("h"));
+		assertTrue(DupDetector.CppExtensions.contains("hpp"));
+		assertTrue(DupDetector.CppExtensions.contains("H"));
+		
+		assertEquals(27, DupDetector.MinSequenceLength);
+		assertEquals(33, DupDetector.MaxSubstitutions);
+		
+		
+	}
 
 }
