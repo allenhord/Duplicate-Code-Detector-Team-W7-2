@@ -76,43 +76,7 @@ public class DupDetector {
 
 						if (extension.contains("ini"))
 						{
-							//read ini parameters
-							try {
-								Ini ini = new Ini(new File(pathString));
-								String Extensions = ini.get("cpp", "CppExtensions");
-								//System.out.println(Extensions);
-								String[] arrExtensions = Extensions.split(",", 0);
-								CppExtensions.clear();
-								for (String i : arrExtensions)
-								{
-									CppExtensions.add(i);
-
-								}
-								
-								int minSeqLen = ini.get("cpp", "MinSequenceLength", int.class);
-								MinSequenceLength = minSeqLen;
-								
-								int maxSub = ini.get("cpp", "MaxSubstitutions", int.class);
-								MaxSubstitutions = maxSub;
-
-								/*
-								for (String i : CppExtensions) {
-									System.out.println(i);
-
-								}*/
-
-
-							}
-							catch (IllegalArgumentException e) {
-								System.out.println("Illegal property parameter in properties file.");
-								System.exit(1);
-							}
-							catch (InvalidFileFormatException e) {
-								System.out.println("Invalid file format.");
-							}
-							catch (IOException e) {
-								System.out.println("Problem reading file.");
-							}		
+							iniParse(pathString);		
 						}
 						//if it is a file that has extension from CppExtensions then do stuff
 					else if (CppExtensions.contains(extension))
@@ -231,6 +195,39 @@ public class DupDetector {
 		
 
 }
+
+	private static void iniParse(String pathString) {
+		//read ini parameters
+		try {
+			Ini ini = new Ini(new File(pathString));
+			String Extensions = ini.get("cpp", "CppExtensions");
+			//System.out.println(Extensions);
+			String[] arrExtensions = Extensions.split(",", 0);
+			CppExtensions.clear();
+
+			for (String i : arrExtensions)
+			{
+				CppExtensions.add(i);
+
+			}
+
+			int minSeqLen = ini.get("cpp", "MinSequenceLength", int.class);
+			MinSequenceLength = minSeqLen;
+
+			int maxSub = ini.get("cpp", "MaxSubstitutions", int.class);
+			MaxSubstitutions = maxSub;
+		}
+		catch (IllegalArgumentException e) {
+			System.out.println("Illegal property parameter in properties file.");
+			System.exit(1);
+		}
+		catch (InvalidFileFormatException e) {
+			System.out.println("Invalid file format.");
+		}
+		catch (IOException e) {
+			System.out.println("Problem reading file.");
+		}
+	}
 	
 	//method to scan the first parameter as number of suggestions
 	public static boolean numberSuggstionCheck(String inputString)
