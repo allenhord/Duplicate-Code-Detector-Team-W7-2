@@ -60,9 +60,9 @@ public class DupDetector {
 
 				//if it is the second argument then there is a possibility of it being the properties file
 
-				File currFile=new File(args[currArg]);
+				File currFile=new File(args[currArg]);				
 				String pathString=currFile.toString();
-
+				
 				//this is only for the first file check
 				if(currFile.exists() && currFile.isFile() && currArg==1 )
 				{
@@ -73,10 +73,10 @@ public class DupDetector {
 						//get the extension check
 						int index=pathString.lastIndexOf('.');
 						String extension= pathString.substring(index+1);
-
+						
 						if (extension.contains("ini"))
 						{
-							iniParse(pathString);		
+							iniParse(pathString);
 						}
 						//if it is a file that has extension from CppExtensions then do stuff
 					else if (CppExtensions.contains(extension))
@@ -196,12 +196,12 @@ public class DupDetector {
 
 }
 
-	private static void iniParse(String pathString) {
+	public static boolean iniParse(String path) {
 		//read ini parameters
+		boolean retBool=true;
 		try {
-			Ini ini = new Ini(new File(pathString));
+			Ini ini = new Ini(new File(path));
 			String Extensions = ini.get("cpp", "CppExtensions");
-			//System.out.println(Extensions);
 			String[] arrExtensions = Extensions.split(",", 0);
 			CppExtensions.clear();
 
@@ -219,14 +219,18 @@ public class DupDetector {
 		}
 		catch (IllegalArgumentException e) {
 			System.out.println("Illegal property parameter in properties file.");
-			System.exit(1);
+			retBool=false;
 		}
 		catch (InvalidFileFormatException e) {
 			System.out.println("Invalid file format.");
+			retBool=false;
 		}
 		catch (IOException e) {
 			System.out.println("Problem reading file.");
+			retBool=false;
 		}
+		//System.out.println(retBool);
+		return retBool;
 	}
 	
 	//method to scan the first parameter as number of suggestions
