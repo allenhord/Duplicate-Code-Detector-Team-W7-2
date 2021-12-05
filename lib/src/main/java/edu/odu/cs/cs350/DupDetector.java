@@ -76,7 +76,7 @@ public class DupDetector {
 
 						if (extension.contains("ini"))
 						{
-							//System.out.println("ini read successfully");
+							//read ini parameters
 							try {
 								Ini ini = new Ini(new File(pathString));
 								String Extensions = ini.get("cpp", "CppExtensions");
@@ -88,6 +88,12 @@ public class DupDetector {
 									CppExtensions.add(i);
 
 								}
+								
+								int minSeqLen = ini.get("cpp", "MinSequenceLength", int.class);
+								MinSequenceLength = minSeqLen;
+								
+								int maxSub = ini.get("cpp", "MaxSubstitutions", int.class);
+								MaxSubstitutions = maxSub;
 
 								/*
 								for (String i : CppExtensions) {
@@ -96,6 +102,10 @@ public class DupDetector {
 								}*/
 
 
+							}
+							catch (IllegalArgumentException e) {
+								System.out.println("Illegal property parameter in properties file.");
+								System.exit(1);
 							}
 							catch (InvalidFileFormatException e) {
 								System.out.println("Invalid file format.");
@@ -112,7 +122,6 @@ public class DupDetector {
 						
 						//display the path to that file
 						//System.out.println(pathString);
-						
 
 						try {
 							ArrayList<Token> tokensInFile=ScanFile(currFile);
