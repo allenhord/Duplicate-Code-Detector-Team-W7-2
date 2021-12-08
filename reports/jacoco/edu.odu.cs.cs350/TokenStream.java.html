@@ -17,19 +17,19 @@ public class TokenStream implements Iterable&lt;Token&gt;{
 	private List&lt;Token&gt; tokens;
 	
    
-<span class="fc" id="L20">    public TokenStream(final Reader input) {</span>
-<span class="fc" id="L21">        tokens = new LinkedList&lt;Token&gt;();</span>
-<span class="fc" id="L22">        jflexScanner scanner = new jflexScanner (input);</span>
+<span class="nc" id="L20">    public TokenStream(final Reader input) {</span>
+<span class="nc" id="L21">        tokens = new LinkedList&lt;Token&gt;();</span>
+<span class="nc" id="L22">        jflexScanner scanner = new jflexScanner (input);</span>
         try {
-<span class="fc" id="L24">            Token token = scanner.yylex();</span>
-<span class="pc bpc" id="L25" title="1 of 4 branches missed.">            while (token != null &amp;&amp; token.getType() != TokenKinds.EOF) {</span>
-<span class="fc" id="L26">                tokens.add (token);</span>
-<span class="fc" id="L27">                token = scanner.yylex();</span>
+<span class="nc" id="L24">            Token token = scanner.yylex();</span>
+<span class="nc bnc" id="L25" title="All 4 branches missed.">            while (token != null &amp;&amp; token.getType() != TokenKinds.EOF) {</span>
+<span class="nc" id="L26">                tokens.add (token);</span>
+<span class="nc" id="L27">                token = scanner.yylex();</span>
             }
 <span class="nc" id="L29">        } catch (IOException ex) {</span>
             // Not necessarily a problem, depending on the input source
-<span class="fc" id="L31">        }</span>
-<span class="fc" id="L32">    }</span>
+<span class="nc" id="L31">        }</span>
+<span class="nc" id="L32">    }</span>
         
         /**
          * Return an iterator over the list of tokens.
@@ -37,8 +37,8 @@ public class TokenStream implements Iterable&lt;Token&gt;{
          */
         @Override
         public final Iterator&lt;Token&gt; iterator() {
-<span class="fc" id="L40">            return tokens.iterator();</span>
+<span class="nc" id="L40">            return tokens.iterator();</span>
         }
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

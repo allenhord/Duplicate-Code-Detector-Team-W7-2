@@ -27,47 +27,47 @@ public class SourceCodeFiles {
 		int i;
 
 		// create a new array of size n+1
-<span class="fc" id="L30">		String newarr[] = new String[n + 1];</span>
+<span class="nc" id="L30">		String newarr[] = new String[n + 1];</span>
 
 		// insert the elements from
 		// the old array into the new array
 		// insert all elements till n
 		// then insert x at n+1
-<span class="fc bfc" id="L36" title="All 2 branches covered.">		for (i = 0; i &lt; n; i++)</span>
-<span class="fc" id="L37">			newarr[i] = arr[i];</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">		for (i = 0; i &lt; n; i++)</span>
+<span class="nc" id="L37">			newarr[i] = arr[i];</span>
 
-<span class="fc" id="L39">		newarr[n] = x;</span>
+<span class="nc" id="L39">		newarr[n] = x;</span>
 
-<span class="fc" id="L41">		return newarr;</span>
+<span class="nc" id="L41">		return newarr;</span>
 	}
 
 	//add filepath to filePathArray[]
 	public void addFilePathArray(String filepath) {
-<span class="fc" id="L46">		File tempFile = new File(filepath);</span>
-<span class="fc" id="L47">		boolean fileExists = tempFile.exists();</span>
+<span class="nc" id="L46">		File tempFile = new File(filepath);</span>
+<span class="nc" id="L47">		boolean fileExists = tempFile.exists();</span>
 
-<span class="pc bpc" id="L49" title="1 of 2 branches missed.">		if (fileExists) {</span>
-<span class="fc" id="L50">			int n = getNumCFiles();</span>
-<span class="fc" id="L51">			String absFilepath = tempFile.getAbsolutePath();</span>
-<span class="fc" id="L52">			boolean filePresent = false;</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">		if (fileExists) {</span>
+<span class="nc" id="L50">			int n = getNumCFiles();</span>
+<span class="nc" id="L51">			String absFilepath = tempFile.getAbsolutePath();</span>
+<span class="nc" id="L52">			boolean filePresent = false;</span>
 
-<span class="fc bfc" id="L54" title="All 2 branches covered.">			if (this.filePathArray == null) {//searching an empty array causes problems</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">			if (this.filePathArray == null) {//searching an empty array causes problems</span>
 			}
-<span class="pc bpc" id="L56" title="1 of 2 branches missed.">			else if (containsFilepath(absFilepath)) {//check if filepath is already in filePathArray</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">			else if (containsFilepath(absFilepath)) {//check if filepath is already in filePathArray</span>
 				//System.out.println(absFilepath + &quot; already in array!&quot;);
 <span class="nc" id="L58">				filePresent = true;</span>
 			}
-<span class="pc bpc" id="L60" title="1 of 2 branches missed.">			if (!filePresent){</span>
-<span class="fc" id="L61">				String[] arr = this.filePathArray;</span>
-<span class="fc" id="L62">				String x = absFilepath;</span>
-<span class="fc" id="L63">				this.filePathArray = addX(n,arr,x);</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">			if (!filePresent){</span>
+<span class="nc" id="L61">				String[] arr = this.filePathArray;</span>
+<span class="nc" id="L62">				String x = absFilepath;</span>
+<span class="nc" id="L63">				this.filePathArray = addX(n,arr,x);</span>
 				//update # of C++ files
-<span class="fc" id="L65">				this.setNumCFiles(filePathArray.length);</span>
+<span class="nc" id="L65">				this.setNumCFiles(filePathArray.length);</span>
 				//sort array
-<span class="fc" id="L67">				Arrays.sort(this.getFilePathArray());</span>
+<span class="nc" id="L67">				Arrays.sort(this.getFilePathArray());</span>
 			}
 		}
-<span class="fc" id="L70">	}</span>
+<span class="nc" id="L70">	}</span>
 	//update arrayPathSet
 	//this.addFilePaths(filepath);
 
@@ -91,16 +91,16 @@ public class SourceCodeFiles {
 
 	//check if a filepath exists in filePathArray
 	public boolean containsFilepath(String filepath) {
-<span class="fc" id="L94">		boolean found = false;</span>
-<span class="fc" id="L95">		String searchedValue = filepath;</span>
-<span class="fc" id="L96">		String[] stringArray = this.filePathArray;</span>
-<span class="fc bfc" id="L97" title="All 2 branches covered.">		for(String x : stringArray){</span>
-<span class="pc bpc" id="L98" title="1 of 2 branches missed.">		    if(x.equals(searchedValue)){</span>
+<span class="nc" id="L94">		boolean found = false;</span>
+<span class="nc" id="L95">		String searchedValue = filepath;</span>
+<span class="nc" id="L96">		String[] stringArray = this.filePathArray;</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">		for(String x : stringArray){</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">		    if(x.equals(searchedValue)){</span>
 <span class="nc" id="L99">		        found = true;</span>
 <span class="nc" id="L100">		        break;</span>
 		    }
 		}
-<span class="fc" id="L103">		return found;</span>
+<span class="nc" id="L103">		return found;</span>
 	}
 	
 	public String getFilePath(int x) {
@@ -141,7 +141,7 @@ public class SourceCodeFiles {
 
 	//return the filePathArray
 	public Object[] getFilePathArray() {
-<span class="fc" id="L144">		return filePathArray;</span>
+<span class="nc" id="L144">		return filePathArray;</span>
 	}
 
 	// @param filePathArray the filePathArray to set
@@ -154,15 +154,15 @@ public class SourceCodeFiles {
 	//return the numCFiles
 
 	public int getNumCFiles() {
-<span class="fc" id="L157">		return numCFiles;</span>
+<span class="nc" id="L157">		return numCFiles;</span>
 	}
 
 	/**
 	 * @param numCFiles the numCFiles to set
 	 */
 	public void setNumCFiles(int numCFiles) {
-<span class="fc" id="L164">		this.numCFiles = numCFiles;</span>
-<span class="fc" id="L165">	}</span>
+<span class="nc" id="L164">		this.numCFiles = numCFiles;</span>
+<span class="nc" id="L165">	}</span>
 
 	/**
 	 * @return the numSuggestions
@@ -178,4 +178,4 @@ public class SourceCodeFiles {
 <span class="fc" id="L178">		this.numSuggestions = numSuggestions;</span>
 <span class="fc" id="L179">	}</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

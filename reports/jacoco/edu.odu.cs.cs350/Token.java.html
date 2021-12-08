@@ -30,23 +30,23 @@ public class Token {
 	 * Constructor for a specific token
 	 */
 	public Token (final TokenKinds kindOfToken, final int line, final int column, final String theLexeme)
-<span class="fc" id="L33">	{</span>
-<span class="fc" id="L34">		type=kindOfToken;</span>
-<span class="fc" id="L35">		lexeme=theLexeme;</span>
-<span class="fc" id="L36">		columnNumber=column;</span>
-<span class="fc" id="L37">		lineNumber=line;</span>
-<span class="fc" id="L38">	}</span>
+<span class="nc" id="L33">	{</span>
+<span class="nc" id="L34">		type=kindOfToken;</span>
+<span class="nc" id="L35">		lexeme=theLexeme;</span>
+<span class="nc" id="L36">		columnNumber=column;</span>
+<span class="nc" id="L37">		lineNumber=line;</span>
+<span class="nc" id="L38">	}</span>
 	
 	/*
 	 * Constructor for a default token with no lexeme
 	 */
 	public Token (final TokenKinds kindOfToken, final int line, final int column)
-<span class="fc" id="L44">	{</span>
-<span class="fc" id="L45">		type=kindOfToken;</span>
-<span class="fc" id="L46">		lexeme=&quot;&quot;;</span>
-<span class="fc" id="L47">		columnNumber=column;</span>
-<span class="fc" id="L48">		lineNumber=line;</span>
-<span class="fc" id="L49">	}</span>
+<span class="nc" id="L44">	{</span>
+<span class="nc" id="L45">		type=kindOfToken;</span>
+<span class="nc" id="L46">		lexeme=&quot;&quot;;</span>
+<span class="nc" id="L47">		columnNumber=column;</span>
+<span class="nc" id="L48">		lineNumber=line;</span>
+<span class="nc" id="L49">	}</span>
 	
 	//accessor functions
 	
@@ -57,7 +57,7 @@ public class Token {
 	
 	public final TokenKinds getType()
 	{
-<span class="fc" id="L60">		return type;</span>
+<span class="nc" id="L60">		return type;</span>
 	}
 	
 	/*
@@ -66,7 +66,7 @@ public class Token {
 	 */
 	public final String getLexeme()
 	{
-<span class="fc" id="L69">		return lexeme;</span>
+<span class="nc" id="L69">		return lexeme;</span>
 	}
 	
 	/*
@@ -76,7 +76,7 @@ public class Token {
 	
 	public final int getLineNumber()
 	{
-<span class="fc" id="L79">		return lineNumber;</span>
+<span class="nc" id="L79">		return lineNumber;</span>
 	}
 	
 	/*
@@ -86,10 +86,10 @@ public class Token {
 	
 	public final int getColumnNumber()
 	{
-<span class="fc" id="L89">		return columnNumber;</span>
+<span class="nc" id="L89">		return columnNumber;</span>
 	}
 
 	
 	
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
